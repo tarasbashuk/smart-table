@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { Provider } from "react-redux"
-import Header from './Header.jsx'
+import Header from './components/Header.jsx'
+import MainTable from './components/MainTable.jsx'
 
 // import store from "./store";
 
@@ -12,8 +13,8 @@ class App extends Component {
             // <Provider store={store}>
                 <div>
                     <h1>It Works!</h1>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident, vel!</p>
                     <Header></Header>
+                    <MainTable></MainTable>
                 </div>
            // </Provider>
         )
