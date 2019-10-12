@@ -1,12 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import TableCell from './TableCell'
+// import PropTypes from 'prop-types'
 
 import makeTable from '../helpers/makeTable'
 
 
 const MainTable = () => {
-   
+    
     const table = makeTable(25)
 
     return ( 
@@ -20,5 +19,5 @@ const MainTable = () => {
      )
 }
  
-export default MainTable;
+export default MainTable
 
