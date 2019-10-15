@@ -2,12 +2,11 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 
-import { setTableCell } from "../actions/tableCell"
+import { setTableCell, getTableCell } from "../actions/tableCell"
 import getFormatedInputValue from "../helpers/getFormatedInputValue"
 
-const TableCell = ({ id, setTableCell }) => {
+const TableCell = ({ id, activeCell, setTableCell, getTableCell }) => {
   let [inputValue, setInputValue] = useState("")
-
   const onChange = e => {
     setInputValue(e.target.value)
   }
@@ -38,7 +37,9 @@ const TableCell = ({ id, setTableCell }) => {
       setInputValue("")
       return
     }
-    const formatedInput = inputValue.replace(/\s/g, "")
+    getTableCell(id)
+    console.log(activeCell)
+    const formatedInput = activeCell.value.replace(/\s/g, "")
     setInputValue(formatedInput)
   }
 
@@ -56,5 +57,14 @@ const TableCell = ({ id, setTableCell }) => {
     </td>
   )
 }
+TableCell.propTypes = {
+  id: PropTypes.string.isRequired,
+  setTableCell: PropTypes.func.isRequired,
+  getTableCell: PropTypes.func.isRequired
+}
 
-export default connect (null, {setTableCell}) (TableCell)
+const mapStateToProps = state =>  ({
+  activeCell: state.tableCell.activeCell
+})
+
+export default connect (mapStateToProps, { setTableCell, getTableCell }) (TableCell)

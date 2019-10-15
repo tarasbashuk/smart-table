@@ -29,6 +29,7 @@ module.exports = {
     ]
   },
   plugins: [
+    
     new CleanWebpackPlugin({
       verbose: true
   }),

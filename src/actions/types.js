@@ -1,2 +1,2 @@
 export const SET_TABLE_CELL = "SET_TABLE_CELL"
-export const UPDATE_TABLE_CELL = "UPDATE_TABLE_CELL"
+export const GET_TABLE_CELL = "GET_TABLE_CELL"
