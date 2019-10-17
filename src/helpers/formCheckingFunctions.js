@@ -1,19 +1,34 @@
-export const chekForString = inputValue => {
-    const regexTwoDotsComas = /(\.|,).*(\.|,)/
-    const regexTwoMoneySigns = /(\$).*(\$)/
-    const regexAllExceptDotComaDigit = /[^.,\$\d]/
+import {
+  regexContainsTwoDotsComas,
+  regexContainsTwoMoneySigns,
+  regexContainsAllExceptDotComaDigit,
+  regexContainsMoneySign,
+  regexContainsURL,
+  regexContainsFunction,
+  regexIsSumFunction,
+  regexIsAverageFunction,
+  regexIsConcatFunction
+} from "./regExp"
 
-    return (
-      regexTwoDotsComas.test(inputValue) ||
-      regexAllExceptDotComaDigit.test(inputValue) ||
-      regexTwoMoneySigns.test(inputValue)
-    )
-  }
+export const chekForString = inputValue =>
+  regexContainsTwoDotsComas.test(inputValue) ||
+  regexContainsAllExceptDotComaDigit.test(inputValue) ||
+  regexContainsTwoMoneySigns.test(inputValue)
 
-export  const chekForMoneyString = inputValue => {
-    const regexContainsMoneySign = /\d+\s?\$$/g
+export const chekForMoneyString = inputValue =>
+  regexContainsMoneySign.test(inputValue)
 
-    return regexContainsMoneySign.test(inputValue)
-  }
+export const chekForURLString = inputValue => 
+  regexContainsURL.test(inputValue)
 
-  
+export const chekForFunctions = inputValue => 
+  regexContainsFunction.test(inputValue)
+
+export const checkForSUMFunction = inputValue => 
+  regexIsAverageFunction.test(inputValue)
+
+export const checkForAVERAGEFunction = inputValue => 
+  regexIsSumFunction.test(inputValue)
+
+export const checkForCONCATFunction = inputValue => 
+  regexIsConcatFunction.test(inputValue)

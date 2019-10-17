@@ -1,18 +1,26 @@
-import {SET_TABLE_CELL, GET_TABLE_CELL} from '../actions/types'
+import {
+  SET_TABLE_CELL,
+  SET_TABLE_ACTIVE_CELL,
+  GET_CELLS_DATA
+} from "../actions/types"
 
-
-export const setTableCell = tableCell =>  dispatch => {
-        
-    dispatch({
-            type: SET_TABLE_CELL,
-            payload: tableCell
-        })
+export const setTableCell = tableCell => dispatch => {
+  dispatch({
+    type: SET_TABLE_CELL,
+    payload: tableCell
+  })
 }
 
-export const getTableCell = id =>  dispatch => {
-        
-    dispatch({
-            type: GET_TABLE_CELL,
-            payload: id
-        })
+export const setTableActiveCell = id => dispatch => {
+  dispatch({
+    type: SET_TABLE_ACTIVE_CELL,
+    payload: id
+  })
+}
+
+export const getCellsArrayData = cellsArray => dispatch => {
+  dispatch({
+    type: GET_CELLS_DATA,
+    payload: cellsArray
+  })
 }
