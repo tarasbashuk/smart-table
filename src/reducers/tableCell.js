@@ -1,7 +1,6 @@
 import {
   SET_TABLE_ACTIVE_CELL,
-  SET_TABLE_CELL,
-  GET_CELLS_DATA
+  SET_TABLE_CELL
 } from "../actions/types"
 
 const initialState = {
@@ -24,16 +23,6 @@ export default function(state = initialState, action) {
         cell => cell.id !== payload.id
       )
       return { ...state, tableCells: [...updatedTableCells, payload] }
-
-    case GET_CELLS_DATA:
-      const cellsData = payload.map(cellID => {
-        let value
-        state.tableCells.forEach(cell => {
-          if (cell.id === cellID) value = cell.value
-        })
-        return value
-      })
-      return { ...state, cellsData: cellsData }
 
     default:
       return { ...state }

@@ -25,10 +25,10 @@ export const chekForFunctions = inputValue =>
   regexContainsFunction.test(inputValue)
 
 export const checkForSUMFunction = inputValue => 
-  regexIsAverageFunction.test(inputValue)
+  regexIsSumFunction.test(inputValue)
 
 export const checkForAVERAGEFunction = inputValue => 
-  regexIsSumFunction.test(inputValue)
+  regexIsAverageFunction.test(inputValue)
 
 export const checkForCONCATFunction = inputValue => 
   regexIsConcatFunction.test(inputValue)

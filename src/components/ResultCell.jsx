@@ -6,7 +6,7 @@ const ResultCell = ({ activeCell }) => {
   let result = "", id = ""
 
   if (activeCell)  {
-    result = activeCell.value
+    result = activeCell.functionResult
     id = activeCell.id
 } 
 

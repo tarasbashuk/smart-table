@@ -11,20 +11,28 @@ import {
   formatFormToURLString
 } from "./formFormatingFunctions"
 
-import {getCellsArray} from "./formFunctionExecution"
+import getInputFunctionResult from "./getInputFunctionResult"
 
-const getFormatedInputValue = inputValue => {
+const getFormatedInputValue = (inputValue, tableCells) => {
   if (inputValue === "") {
     return {
       value: "",
       type: "emptyString"
     }
   } else if (chekForFunctions(inputValue)) {
-    const cellsArray = getCellsArray(inputValue)
+    console.log("Зашли в chekForFunctions")
+    const result = getInputFunctionResult(inputValue, tableCells)
+    console.log("result-", result)
+
+    let formatedResult
+    typeof result === "string" ? formatedResult = result : 
+    formatedResult = formatFormToNumberString(result.toString())
+    
     return {
       value: inputValue,
-      type: "function",
-      cellsArray
+      functionResult: formatedResult,
+      type: "function", 
+      hasFunctionResult: true
     }
   } else if (chekForURLString(inputValue)) {
     const formatedInput = formatFormToURLString(inputValue)

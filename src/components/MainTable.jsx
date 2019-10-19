@@ -7,7 +7,7 @@ import ResultCell from './ResultCell'
 
 const MainTable = () => {
     
-    const table = makeTable(25)
+    const table = makeTable(3)
 
     return ( 
         <div className="container">

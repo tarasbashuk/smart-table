@@ -4,19 +4,24 @@ import {
     checkForCONCATFunction
 } from "./formCheckingFunctions"
 
-const getInputFunctionResult = inputValue => {
+import {getSum} from './formFunctionExecution'
+
+const getInputFunctionResult = (inputValue, tableCells) => {
+    console.log(inputValue)
+    console.log(checkForSUMFunction(inputValue))
     if (checkForSUMFunction(inputValue)) {
-        const inputResult = formatFormToURLString(inputValue)
-        return formatedInput
-    } else if (checkForAVERAGEFunction(inputValue)) {
-        const formatedInput = formatFormToURLString(inputValue)
-        return formatedInput
-    } else if (checkForCONCATFunction(inputValue)) {
-        const formatedInput = formatFormToURLString(inputValue)
-        return formatedInput
+          console.log("Зашли в checkForSUMFunction")
+        const functionResult = getSum(inputValue, tableCells)
+        return functionResult
+    // } else if (checkForAVERAGEFunction(inputValue)) {
+    //     const formatedInput = formatFormToURLString(inputValue)
+    //     return formatedInput
+    // } else if (checkForCONCATFunction(inputValue)) {
+    //     const formatedInput = formatFormToURLString(inputValue)
+    //     return formatedInput
     } else {
-        console.warn("Wrong format for functions")
-        return "Wrong format for functions"
+        console.log("Wrong format for functions")
+        return "Wrong format"
     }
 }
 

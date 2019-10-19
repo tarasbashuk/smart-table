@@ -1,7 +1,6 @@
 import {
   SET_TABLE_CELL,
   SET_TABLE_ACTIVE_CELL,
-  GET_CELLS_DATA
 } from "../actions/types"
 
 export const setTableCell = tableCell => dispatch => {
@@ -18,9 +17,3 @@ export const setTableActiveCell = id => dispatch => {
   })
 }
 
-export const getCellsArrayData = cellsArray => dispatch => {
-  dispatch({
-    type: GET_CELLS_DATA,
-    payload: cellsArray
-  })
-}

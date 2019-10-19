@@ -12,7 +12,7 @@ export const regexContainsURL = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z
 
 export const regexContainsFunction = /=([A-Z])*\(([A-Z0-9+,])*\)/
 
-export const regexIsSumFunction = /=SUM\(([A-Z0-9,])*\)/
+export const regexIsSumFunction = /=SUM\(([A-Z0-9+])*\)/
 
 export const regexIsAverageFunction = /=AVERAGE\(([A-Z0-9,])*\)/
 

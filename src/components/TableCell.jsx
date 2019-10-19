@@ -1,70 +1,99 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 // TODO delete if not use, also async module fo babel
 // import { subscribeActionAfter } from "redux-subscribe-action"
 
-import { setTableCell, setTableActiveCell, getCellsArrayData } from "../actions/tableCell"
+import {
+  setTableCell,
+  setTableActiveCell
+} from "../actions/tableCell"
 import getFormatedInputValue from "../helpers/getFormatedInputValue"
-import { getInputFunctionResult } from "../helpers/formFunctionExecution"
 
-const TableCell = ({ id, cellsData, setTableCell, setTableActiveCell, getCellsArrayData }) => {
-  let [inputValue, setInputValue] = useState("")
+const TableCell = ({
+  id,
+  tableCells,
+  setTableCell,
+  setTableActiveCell
+}) => {
+  let cellDataFromProps = {
+    value: ""
+  }
+
+  if (tableCells.length > 0) {
+    tableCells.forEach(cell => {
+      if (cell.id === id) {
+        cellDataFromProps = cell
+      }
+    })
+  }
+
+  useEffect(() => {
+    const formatedInput = getFormatedInputValue(cellDataFromProps.value, tableCells)
+    if (cellDataFromProps.type === "function" && !(cellDataFromProps.functionResult === formatedInput.functionResult)) {
+      setInputValue(formatedInput.functionResult)
+
+      setTableCell({
+        id,
+        value: cellDataFromProps.value,
+        type: formatedInput.type,
+        functionResult: formatedInput.functionResult
+      })
+    }
+  }, [tableCells])
+
+  let [inputValue, setInputValue] = useState(cellDataFromProps.value)
+
+  const setFormatedInput = formatedInput => {
+  if (formatedInput.type === "function") {
+    console.log("formatedInput.functionResult-", formatedInput.functionResult)
+    setInputValue(formatedInput.functionResult)
+    setTableCell({
+      id,
+      value: inputValue,
+      type: formatedInput.type,
+      functionResult: formatedInput.functionResult
+    })
+    
+  } else {
+    setInputValue(formatedInput.value)
+    setTableCell({
+      id,
+      value: formatedInput.value,
+      type: formatedInput.type,
+      functionResult: formatedInput.value
+    })
+  }
+}
+
   const onChange = e => {
     setInputValue(e.target.value)
   }
 
   const onBlur = () => {
-    const formatedInput = getFormatedInputValue(inputValue)
-    console.log(formatedInput)
-
-    if (formatedInput.cellsArray) {
-      getCellsArrayData(formatedInput.cellsArray)
-      const result = getInputFunctionResult(inputValue, cellsData)
-      setInputValue(inputValue)
-      setTableCell({
-        id,
-        value: result,
-        type: formatedInput.type
-      })
-
-    } else {    
-      setInputValue(formatedInput.value)
-      setTableCell({
-        id,
-        value: formatedInput.value,
-        type: formatedInput.type
-      })}
-
-    
+    const formatedInput = getFormatedInputValue(inputValue, tableCells)
+    setFormatedInput(formatedInput)
   }
+
   const onKeyEnter = e => {
     if (e.key === "Enter") {
-      const formatedInput = getFormatedInputValue(inputValue)
-      setInputValue(formatedInput.value)
-      setTableCell({
-        id,
-        value: formatedInput.value,
-        type: formatedInput.type
-      })
-      setTableActiveCell(id)
+      setFormatedInput(formatedInput)
     }
   }
   const onFocus = () => {
-     if (inputValue === "") {
+    if (inputValue === "") {
       setInputValue("")
-      setTableCell({
-        id,
-        value: "",
-        type: "emptyString"
-      })
+
+    } else if (cellDataFromProps.type === "function") {
+      setInputValue(cellDataFromProps.value)
+
+    } else {
+      const formatedInput = inputValue.toString().replace(/\s/g, "")
+      setInputValue(formatedInput)
     }
+
     setTableActiveCell(id)
-    const formatedInput = inputValue.replace(/\s/g, "")
-    setInputValue(formatedInput)
   }
-
-
 
   return (
     <td>
@@ -82,17 +111,18 @@ const TableCell = ({ id, cellsData, setTableCell, setTableActiveCell, getCellsAr
 }
 TableCell.propTypes = {
   id: PropTypes.string.isRequired,
+  tableCells: PropTypes.array.isRequired,
   setTableCell: PropTypes.func.isRequired,
-  setTableActiveCell: PropTypes.func.isRequired,
-  getCellsArrayData: PropTypes.func.isRequired
+  setTableActiveCell: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
+  tableCells: state.tableCell.tableCells,
   activeCell: state.tableCell.activeCell,
   cellsData: state.tableCell.cellsData
 })
 
 export default connect(
   mapStateToProps,
-  { setTableCell, setTableActiveCell, getCellsArrayData }
+  { setTableCell, setTableActiveCell }
 )(TableCell)
