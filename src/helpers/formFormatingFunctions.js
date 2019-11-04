@@ -2,10 +2,12 @@ import { regexFormatDigitsWithSpaces, regexContainsURL } from "./regExp"
 
 export const formatFormToMoneyString = inputValue => {
   const input = inputValue.replace("$", "").replace(",", ".")
-  const formatedInput = Number(input).toLocaleString("ua-UA", {
-    style: "currency",
-    currency: "USD"
-  })
+  const formatedInput = Number(input)
+    .toLocaleString("ua-EN", {
+      style: "currency",
+      currency: "USD"
+    })
+    .replace(",", ".")
 
   return formatedInput
 }

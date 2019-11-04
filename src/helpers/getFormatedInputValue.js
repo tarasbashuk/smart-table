@@ -25,6 +25,9 @@ const getFormatedInputValue = (inputValue, tableCells) => {
     console.log("result-", result)
 
     let formatedResult
+    
+    // check for error message in result
+
     typeof result === "string" ? formatedResult = result : 
     formatedResult = formatFormToNumberString(result.toString())
     

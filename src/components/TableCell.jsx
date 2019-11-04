@@ -77,6 +77,7 @@ const TableCell = ({
 
   const onKeyEnter = e => {
     if (e.key === "Enter") {
+      const formatedInput = getFormatedInputValue(inputValue, tableCells)
       setFormatedInput(formatedInput)
     }
   }
