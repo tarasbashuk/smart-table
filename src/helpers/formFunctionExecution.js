@@ -13,6 +13,7 @@ const getTypeOfResult = typeOfData => {
   let numberCount = 0
   let moneyCount = 0
   let stringCount = 0
+  // let emtyStringCount = 0
 
   typeOfData.forEach(type => {
     switch (type) {
@@ -25,9 +26,13 @@ const getTypeOfResult = typeOfData => {
         break
 
       case "string":
-      // case "emtyString":
         stringCount++
         break
+
+      // case "emptyString":
+      //   emtyStringCount++
+      //   break
+
       default:
         break
     }
@@ -38,39 +43,43 @@ const getTypeOfResult = typeOfData => {
     (numberCount && stringCount) ||
     (numberCount && stringCount)
   )
-    return "Yoy can add or get average only from one type of cells"
+    return "different data types"
 
   if (numberCount > moneyCount && numberCount > stringCount) return "number"
 
   if (moneyCount > numberCount  && moneyCount > stringCount) return "moneyString"
 
   if (stringCount > numberCount  && stringCount  > moneyCount ) return "string"
+ 
+  // if (emtyStringCount && !stringCount  && !moneyCount &&!numberCount) return "emptyString"
 }
 
 export const getSum = (inputValue, tableCells) => {
   console.log("Зашли в getSUM")
   console.log("inputValue-", inputValue)
   const cellsIdArray = getCellsId(inputValue)
-  console.log("cellsIdArray-", cellsIdArray)
-  console.log("tableCells-", tableCells)
+
   const typeOfData = []
   const cellsData = cellsIdArray.map(cellId => {
+
     let value
     tableCells.forEach(cell => {
       if (cell.id === cellId) {
-        console.log("cell.functionResult-", cell.functionResult)
         value = Number(cell.functionResult.replace(/\s|\$/g, ""))
         typeOfData.push(cell.type)
       }
     })
+    if (!value) return 0
     return value
   })
-  console.log("cellsData-", cellsData)
-  console.log("typeOfData-", typeOfData)
 
-  const typeOfResult = getTypeOfResult(typeOfData)
-  console.log("typeOfResult",typeOfResult)
-  const inputResult = cellsData.reduce((item, sum) => item + sum)
+  const resultType = getTypeOfResult(typeOfData)
+  console.log("TCL: getSum -> resultType", resultType)
 
-  return inputResult
+  const result = cellsData.reduce((item, sum) => item + sum)
+
+  return {
+    result,
+    resultType
+  }
 }

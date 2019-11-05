@@ -72,6 +72,8 @@ const TableCell = ({
 
   const onBlur = () => {
     const formatedInput = getFormatedInputValue(inputValue, tableCells)
+    console.log("TCL: onBlur -> formatedInput", formatedInput)
+    
     setFormatedInput(formatedInput)
   }
 

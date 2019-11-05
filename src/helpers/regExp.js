@@ -4,7 +4,7 @@ export const regexContainsTwoMoneySigns = /(\$).*(\$)/
 
 export const regexContainsAllExceptDotComaDigit = /[^.,\$\d]/
 
-export const regexContainsMoneySign = /\d+\s?\$$/g
+export const regexContainsMoneySign = /\d+\s?\$$/
 
 export const regexFormatDigitsWithSpaces =  /\B(?=(\d{3})+(?!\d))/g
 
