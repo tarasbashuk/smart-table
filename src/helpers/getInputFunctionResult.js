@@ -10,18 +10,25 @@ import {
     // formatFormToURLString,
 } from './formFormatingFunctions'
 
-import {getSum} from './formFunctionExecution'
+import formFunctionExecution from './formFunctionExecution'
 
 const getInputFunctionResult = (inputValue, tableCells) => {
-    console.log(inputValue)
-    console.log(checkForSUMFunction(inputValue))
-    if (checkForSUMFunction(inputValue)) {
-          console.log("Зашли в checkForSUMFunction")
-        const functionResult = getSum(inputValue, tableCells)
 
-        // if (functionResult.resultType === "emptyString") {
-        //     return "0"
-        // }
+    if (checkForSUMFunction(inputValue)) {
+        const functionResult = formFunctionExecution(inputValue, tableCells, "SUM")
+
+        if (functionResult.resultType === "different data types") {
+            return "different type of data"
+        }
+        if (functionResult.resultType === "moneyString") {
+            return formatFormToMoneyString(functionResult.result.toString())
+        }
+        return functionResult.result
+        
+    } else if (checkForAVERAGEFunction(inputValue)) {
+        const functionResult = formFunctionExecution(inputValue, tableCells, "AVERAGE")
+        console.log("TCL: getInputFunctionResult -> functionResult", functionResult)
+
         if (functionResult.resultType === "different data types") {
             return "different type of data"
         }
@@ -30,12 +37,15 @@ const getInputFunctionResult = (inputValue, tableCells) => {
         }
 
         return functionResult.result
-    // } else if (checkForAVERAGEFunction(inputValue)) {
-    //     const formatedInput = formatFormToURLString(inputValue)
-    //     return formatedInput
-    // } else if (checkForCONCATFunction(inputValue)) {
-    //     const formatedInput = formatFormToURLString(inputValue)
-    //     return formatedInput
+    } else if (checkForCONCATFunction(inputValue)) {
+        const functionResult = formFunctionExecution(inputValue, tableCells, "CONCAT")
+
+        // if (functionResult.resultType === "different data types") {
+        //     return "different type of data"
+        // }
+
+        return functionResult.result
+
     } else {
         console.log("Wrong format for functions")
         return "Wrong format"

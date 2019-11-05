@@ -14,8 +14,8 @@ export const regexContainsFunction = /=([A-Z])*\(([A-Z0-9+,])*\)/
 
 export const regexIsSumFunction = /=SUM\(([A-Z0-9+])*\)/
 
-export const regexIsAverageFunction = /=AVERAGE\(([A-Z0-9,])*\)/
+export const regexIsAverageFunction = /=AVERAGE\(([A-Z0-9,+])*\)/
 
-export const regexIsConcatFunction = /=CONCAT\(([A-Z0-9,])*\)/
+export const regexIsConcatFunction = /=CONCAT\(([A-Z0-9,+])*\)/
 
 export const regexFindCellsID = /(?<=\()[A-Z0-9,+]+(?=\))/g

@@ -16,6 +16,7 @@ const TableCell = ({
   setTableCell,
   setTableActiveCell
 }) => {
+
   let cellDataFromProps = {
     value: ""
   }
@@ -46,8 +47,10 @@ const TableCell = ({
 
   const setFormatedInput = formatedInput => {
   if (formatedInput.type === "function") {
-    console.log("formatedInput.functionResult-", formatedInput.functionResult)
+    console.log("formatedInput.functionResult-", formatedInput)
+
     setInputValue(formatedInput.functionResult)
+
     setTableCell({
       id,
       value: inputValue,
@@ -80,10 +83,14 @@ const TableCell = ({
   const onKeyEnter = e => {
     if (e.key === "Enter") {
       const formatedInput = getFormatedInputValue(inputValue, tableCells)
+      console.log("TCL: inputValue in onKeyEntr", inputValue)
       setFormatedInput(formatedInput)
+      onFocus()
     }
   }
   const onFocus = () => {
+  console.log("TCL: onFocus -> onFocus")
+    
     if (inputValue === "") {
       setInputValue("")
 
