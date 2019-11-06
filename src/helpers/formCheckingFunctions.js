@@ -24,11 +24,19 @@ export const chekForURLString = inputValue =>
 export const chekForFunctions = inputValue => 
   regexContainsFunction.test(inputValue)
 
-export const checkForSUMFunction = inputValue => 
-  regexIsSumFunction.test(inputValue)
+// export const checkForSUMFunction = inputValue => 
+//   regexIsSumFunction.test(inputValue)
 
-export const checkForAVERAGEFunction = inputValue => 
-  regexIsAverageFunction.test(inputValue)
+// export const checkForAVERAGEFunction = inputValue => 
+//   regexIsAverageFunction.test(inputValue)
 
-export const checkForCONCATFunction = inputValue => 
-  regexIsConcatFunction.test(inputValue)
+// export const checkForCONCATFunction = inputValue => 
+//   regexIsConcatFunction.test(inputValue)
+
+export const getTypeOfFunction = inputValue => {
+  if (regexIsSumFunction.test(inputValue)) return "SUM"
+  if (regexIsAverageFunction.test(inputValue)) return  "AVERAGE"
+  if (regexIsConcatFunction.test(inputValue)) return "CONCAT"
+  console.log("Wrong format for functions")
+  return "Wrong format"
+}
