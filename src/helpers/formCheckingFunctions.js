@@ -1,42 +1,34 @@
 import {
-  regexContainsTwoDotsComas,
-  regexContainsTwoMoneySigns,
-  regexContainsAllExceptDotComaDigit,
-  regexContainsMoneySign,
-  regexContainsURL,
-  regexContainsFunction,
-  regexIsSumFunction,
-  regexIsAverageFunction,
-  regexIsConcatFunction
-} from "./regExp"
+    regexContainsTwoDotsComas,
+    regexContainsTwoMoneySigns,
+    regexContainsAllExceptDotComaDigit,
+    regexContainsMoneySign,
+    regexContainsURL,
+    regexContainsFunction,
+    regexIsSumFunction,
+    regexIsAverageFunction,
+    regexIsConcatFunction,
+    regexIsHyperlinkFunction
+} from './regExp'
 
 export const chekForString = inputValue =>
-  regexContainsTwoDotsComas.test(inputValue) ||
-  regexContainsAllExceptDotComaDigit.test(inputValue) ||
-  regexContainsTwoMoneySigns.test(inputValue)
+    regexContainsTwoDotsComas.test(inputValue) ||
+    regexContainsAllExceptDotComaDigit.test(inputValue) ||
+    regexContainsTwoMoneySigns.test(inputValue)
 
 export const chekForMoneyString = inputValue =>
-  regexContainsMoneySign.test(inputValue)
+    regexContainsMoneySign.test(inputValue)
 
-export const chekForURLString = inputValue => 
-  regexContainsURL.test(inputValue)
+export const chekForURLString = inputValue =>
+     regexContainsURL.test(inputValue)
 
-export const chekForFunctions = inputValue => 
-  regexContainsFunction.test(inputValue)
-
-// export const checkForSUMFunction = inputValue => 
-//   regexIsSumFunction.test(inputValue)
-
-// export const checkForAVERAGEFunction = inputValue => 
-//   regexIsAverageFunction.test(inputValue)
-
-// export const checkForCONCATFunction = inputValue => 
-//   regexIsConcatFunction.test(inputValue)
+export const chekForFunctions = inputValue =>
+    regexContainsFunction.test(inputValue)
 
 export const getTypeOfFunction = inputValue => {
-  if (regexIsSumFunction.test(inputValue)) return "SUM"
-  if (regexIsAverageFunction.test(inputValue)) return  "AVERAGE"
-  if (regexIsConcatFunction.test(inputValue)) return "CONCAT"
-  console.log("Wrong format for functions")
-  return "Wrong format"
+    if (regexIsSumFunction.test(inputValue)) return 'SUM'
+    if (regexIsAverageFunction.test(inputValue)) return 'AVERAGE'
+    if (regexIsConcatFunction.test(inputValue)) return 'CONCAT'
+    if (regexIsHyperlinkFunction.test(inputValue)) return 'HYPERLINK'
+    return 'Wrong format of function'
 }

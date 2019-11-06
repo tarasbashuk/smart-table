@@ -1,7 +1,13 @@
 import { regexFindCellsID } from './regExp'
+import { formatFormToURLString } from './formFormatingFunctions'
+
+// Get ID's (adresses) of cells from function body
 
 const getCellsId = inputValue => {
     const cellsArray = inputValue.match(regexFindCellsID)
+
+    if (!cellsArray) return null
+
     if (cellsArray[0].match(/,/)) {
         return cellsArray[0].split(',')
     } else {
@@ -9,10 +15,13 @@ const getCellsId = inputValue => {
     }
 }
 
+// Define type of function execution result according to type of cells data
+
 const getTypeOfResult = typeOfData => {
     let numberCount = 0
     let moneyCount = 0
     let stringCount = 0
+    let URLCount = 0
 
     typeOfData.forEach(type => {
         switch (type) {
@@ -28,6 +37,10 @@ const getTypeOfResult = typeOfData => {
                 stringCount++
                 break
 
+            case 'URLString':
+                URLCount++
+                break
+
             default:
                 break
         }
@@ -36,28 +49,41 @@ const getTypeOfResult = typeOfData => {
     if (
         (numberCount && moneyCount) ||
         (numberCount && stringCount) ||
-        (moneyCount && stringCount)
+        (moneyCount && stringCount) ||
+        (URLCount && stringCount) ||
+        (URLCount && moneyCount) ||
+        (URLCount && numberCount) 
     )
         return 'different data types'
 
-    if (numberCount > moneyCount && numberCount > stringCount) return 'number'
+    if (numberCount > moneyCount && numberCount > stringCount  && numberCount > URLCount) return 'number'
 
-    if (moneyCount > numberCount && moneyCount > stringCount)
+    if (moneyCount > numberCount && moneyCount > stringCount && moneyCount > URLCount)
         return 'moneyString'
 
-    if (stringCount > numberCount && stringCount > moneyCount) return 'string'
+    if (stringCount > numberCount && stringCount > moneyCount && stringCount > URLCount) return 'string'
 }
 
-const formFunctionExecution = (inputValue, tableCells, typeOfFunction) => {
-    let emptyValue
+//Execute SUM, AVERAGE and CONCAT functions
+
+export const formFunctionExecution = (
+    inputValue,
+    tableCells,
+    typeOfFunction
+) => {
+    let value, emptyValue, result
     const typeOfData = []
+
+    //Define value for empty string depending on type of function
 
     typeOfFunction === 'CONCAT' ? (emptyValue = '') : (emptyValue = 0)
 
     const cellsIdArray = getCellsId(inputValue)
+    if (!cellsIdArray) return { resultType: 'any cell was not indicated' }
+
+    //Get values and type of data of cells
 
     const cellsData = cellsIdArray.map(cellId => {
-        let value
         tableCells.forEach(cell => {
             if (cell.id === cellId) {
                 typeOfFunction === 'CONCAT'
@@ -69,13 +95,12 @@ const formFunctionExecution = (inputValue, tableCells, typeOfFunction) => {
                 typeOfData.push(cell.typeOfResult)
             }
         })
-        if (!value) return emptyValue
-        return value
+
+        return !value ? emptyValue : value
     })
 
     let resultType = getTypeOfResult(typeOfData)
 
-    let result
     switch (typeOfFunction) {
         case 'SUM':
             result = cellsData.reduce((item, sum) => item + sum)
@@ -101,4 +126,11 @@ const formFunctionExecution = (inputValue, tableCells, typeOfFunction) => {
     }
 }
 
-export default formFunctionExecution
+export const URLFunctionExecution = inputValue => {
+    const result = formatFormToURLString(inputValue)
+
+    return {
+        result,
+        resultType: 'URLString',
+    }
+}

@@ -7,8 +7,7 @@ import {
 
 import {
     formatFormToMoneyString,
-    formatFormToNumberString,
-    formatFormToURLString,
+    formatFormToNumberString
 } from './formFormatingFunctions'
 
 import getInputFunctionResult from './getInputFunctionResult'
@@ -20,6 +19,7 @@ const getFormatedInputValue = (inputValue, tableCells) => {
             type: 'emptyString',
         }
     } else if (chekForFunctions(inputValue)) {
+        console.log("get into chekForFunctions")
         const result = getInputFunctionResult(inputValue, tableCells)
 
         let formatedResult
@@ -36,13 +36,7 @@ const getFormatedInputValue = (inputValue, tableCells) => {
             type: 'function',
             typeOfResult: result.resultType,
         }
-    } else if (chekForURLString(inputValue)) {
-        const formatedInput = formatFormToURLString(inputValue)
-        return {
-            value: formatedInput,
-            type: 'URLString',
-            typeOfResult: 'URLString',
-        }
+
     } else if (chekForMoneyString(inputValue)) {
         const formatedInput = formatFormToMoneyString(inputValue)
         return {
@@ -50,12 +44,14 @@ const getFormatedInputValue = (inputValue, tableCells) => {
             type: 'moneyString',
             typeOfResult: 'moneyString',
         }
+
     } else if (chekForString(inputValue)) {
         return {
             value: inputValue,
             type: 'string',
             typeOfResult: 'string',
         }
+        
     } else {
         const formatedInput = formatFormToNumberString(inputValue)
         return {

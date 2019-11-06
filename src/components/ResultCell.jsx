@@ -16,7 +16,13 @@ const ResultCell = ({ activeCell }) => {
       <th>Current cell:</th>
       <th>{id}</th>
       <th>Current result: </th>
-      <th>{result}</th>
+      <th colSpan="7">{result}</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   )
 }

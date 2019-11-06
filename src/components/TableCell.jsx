@@ -11,6 +11,8 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
         value: '',
     }
 
+    // Get data from store for specifiс cell
+
     if (tableCells.length > 0) {
         tableCells.forEach(cell => {
             if (cell.id === id) {
@@ -19,6 +21,7 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
         })
     }
 
+    // Update the result of the function if the cells that the function refers to have changed data
     useEffect(() => {
         const formatedInput = getFormatedInputValue(
             cellDataFromProps.value,
@@ -41,6 +44,8 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
     }, [tableCells])
 
     let [inputValue, setInputValue] = useState(cellDataFromProps.value)
+
+    // Update cell's data in store
 
     const setFormatedInput = formatedInput => {
         if (formatedInput.type === 'function') {
@@ -65,15 +70,19 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
         }
     }
 
+    // Input handler
+
     const onChange = e => {
         setInputValue(e.target.value)
     }
 
+    // On blur function get data from user, got function result if it needs, formatted input and set input value
     const onBlur = () => {
         const formatedInput = getFormatedInputValue(inputValue, tableCells)
-
         setFormatedInput(formatedInput)
     }
+
+    // The same behavior as at on blur
 
     const onKeyEnter = e => {
         if (e.key === 'Enter') {
@@ -82,6 +91,11 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
             onFocus()
         }
     }
+
+    // If it's a function it will  insert in input value a body of function, not an result
+    // or just format the value for convenience. Also set current active cell to display address
+    // of the cell and result in separate component
+
     const onFocus = () => {
         if (inputValue === '') {
             setInputValue('')
@@ -119,7 +133,6 @@ TableCell.propTypes = {
 const mapStateToProps = state => ({
     tableCells: state.tableCell.tableCells,
     activeCell: state.tableCell.activeCell,
-    cellsData: state.tableCell.cellsData,
 })
 
 export default connect(

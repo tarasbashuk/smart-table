@@ -1,5 +1,4 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 
 import makeTable from '../helpers/makeTable'
 import ResultCell from './ResultCell'
@@ -7,7 +6,7 @@ import ResultCell from './ResultCell'
 
 const MainTable = () => {
     
-    const table = makeTable(15)
+    const table = makeTable(35)
 
     return ( 
         <div className="container">
