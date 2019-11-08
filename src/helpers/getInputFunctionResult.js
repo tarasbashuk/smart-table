@@ -9,8 +9,8 @@ const getInputFunctionResult = (inputValue, tableCells) => {
     const typeOfFunction = getTypeOfFunction(inputValue)
     console.log("TCL: getInputFunctionResult -> typeOfFunction", typeOfFunction)
 
-    if (typeOfFunction === "HYPERLINK") {
-        console.log("get into HYPERLINK")
+    if (typeOfFunction === "HYPER") {
+        console.log("get into HYPER")
         functionResult = URLFunctionExecution(inputValue)
 
     } else {    

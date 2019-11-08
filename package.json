@@ -13,6 +13,8 @@
     "babel-runtime": "^6.26.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-iframe": "^1.8.0",
+    "react-jss": "^10.0.0",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
@@ -35,7 +37,6 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
   },
-
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 4,

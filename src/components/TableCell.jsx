@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { setTableCell, setTableActiveCell } from '../actions/tableCell'
+import { showURLPreview } from '../actions/URLPreview'
+
 
 import getFormatedInputValue from '../helpers/getFormatedInputValue'
 
-const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
+const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell, showURLPreview }) => {
     let cellDataFromProps = {
         value: '',
     }
@@ -58,6 +60,10 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell }) => {
                 functionResult: formatedInput.functionResult,
                 typeOfResult: formatedInput.typeOfResult,
             })
+            if(formatedInput.typeOfResult === "URLString") {
+                console.log("formatedInput", formatedInput.functionResult)
+                showURLPreview(formatedInput.functionResult)
+            }
         } else {
             setInputValue(formatedInput.value)
             setTableCell({
@@ -137,5 +143,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { setTableCell, setTableActiveCell }
+    { setTableCell, setTableActiveCell, showURLPreview }
 )(TableCell)

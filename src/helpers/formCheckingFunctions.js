@@ -29,6 +29,6 @@ export const getTypeOfFunction = inputValue => {
     if (regexIsSumFunction.test(inputValue)) return 'SUM'
     if (regexIsAverageFunction.test(inputValue)) return 'AVERAGE'
     if (regexIsConcatFunction.test(inputValue)) return 'CONCAT'
-    if (regexIsHyperlinkFunction.test(inputValue)) return 'HYPERLINK'
+    if (regexIsHyperlinkFunction.test(inputValue)) return 'HYPER'
     return 'Wrong format of function'
 }
