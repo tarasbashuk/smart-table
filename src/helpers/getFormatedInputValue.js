@@ -11,17 +11,15 @@ import {
 
 import getInputFunctionResult from './getInputFunctionResult'
 
-const getFormatedInputValue = (inputValue, tableCells) => {
+const getFormatedInputValue = (inputValue, tableCells, currentCellID) => {
     if (inputValue === '') {
         return {
             value: '',
             type: 'emptyString',
         }
     } else if (chekForFunctions(inputValue)) {
-        console.log("get into chekForFunctions")
-        const result = getInputFunctionResult(inputValue, tableCells)
-
         let formatedResult
+        const result = getInputFunctionResult(inputValue, tableCells, currentCellID)
 
         // check for error message in result
 

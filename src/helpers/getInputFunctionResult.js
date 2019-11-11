@@ -4,21 +4,19 @@ import { formatFormToMoneyString } from './formFormatingFunctions'
 
 import { formFunctionExecution, URLFunctionExecution } from './formFunctionExecution'
 
-const getInputFunctionResult = (inputValue, tableCells) => {
+const getInputFunctionResult = (inputValue, tableCells, currentCellID) => {
     let functionResult
     const typeOfFunction = getTypeOfFunction(inputValue)
-    console.log("TCL: getInputFunctionResult -> typeOfFunction", typeOfFunction)
 
     if (typeOfFunction === "HYPER") {
-        console.log("get into HYPER")
         functionResult = URLFunctionExecution(inputValue)
 
     } else {    
-        console.log("get into other functions")
         functionResult = formFunctionExecution(
         inputValue,
         tableCells,
-        typeOfFunction
+        typeOfFunction,
+        currentCellID
     )}
 
 

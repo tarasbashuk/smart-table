@@ -52,16 +52,30 @@ const getTypeOfResult = typeOfData => {
         (moneyCount && stringCount) ||
         (URLCount && stringCount) ||
         (URLCount && moneyCount) ||
-        (URLCount && numberCount) 
+        (URLCount && numberCount)
     )
         return 'different data types'
 
-    if (numberCount > moneyCount && numberCount > stringCount  && numberCount > URLCount) return 'number'
+    if (
+        numberCount > moneyCount &&
+        numberCount > stringCount &&
+        numberCount > URLCount
+    )
+        return 'number'
 
-    if (moneyCount > numberCount && moneyCount > stringCount && moneyCount > URLCount)
+    if (
+        moneyCount > numberCount &&
+        moneyCount > stringCount &&
+        moneyCount > URLCount
+    )
         return 'moneyString'
 
-    if (stringCount > numberCount && stringCount > moneyCount && stringCount > URLCount) return 'string'
+    if (
+        stringCount > numberCount &&
+        stringCount > moneyCount &&
+        stringCount > URLCount
+    )
+        return 'string'
 }
 
 //Execute SUM, AVERAGE and CONCAT functions
@@ -69,7 +83,8 @@ const getTypeOfResult = typeOfData => {
 export const formFunctionExecution = (
     inputValue,
     tableCells,
-    typeOfFunction
+    typeOfFunction,
+    currentCellID
 ) => {
     let value, emptyValue, result
     const typeOfData = []
@@ -93,6 +108,10 @@ export const formFunctionExecution = (
                       ))
 
                 typeOfData.push(cell.typeOfResult)
+            }
+            // For preventing recursion when function refers to itself
+            if (currentCellID === cellId) {
+                typeOfFunction === 'CONCAT' ? (value = '') : (value = 0)
             }
         })
 

@@ -10,30 +10,41 @@ import { hideURLPreview } from '../actions/URLPreview'
 
 const URLPreviewModal = ({ classes, hideURLPreview, URL }) => {
     useEffect(() => {
-        window.addEventListener('keyup', handleKeyUp, false);
+        window.addEventListener('keyup', handleKeyUp, false)
         document.addEventListener('click', handleOutsideClick, false)
 
-         return () => {
-          window.removeEventListener('keyup', handleKeyUp, false);
-          document.removeEventListener('click', handleOutsideClick, false)
+        //Unsubscribe listeners when component will unmount
+
+        return () => {
+            window.removeEventListener('keyup', handleKeyUp, false)
+            document.removeEventListener('click', handleOutsideClick, false)
         }
+    }, [])
 
-    },[])
 
-    const URLToDisplay = `http://${URL}?embeded=true`
     const modal = React.createRef()
+    const URLToDisplay = `http://${URL}?embeded=true`
+    
+    const iframeToRender =
+        URL === 'Wrong URL format' ? (
+            <p className={classes.errorMessage}>Wrong URL format</p>
+        ) : (
+            <Iframe width="560" height="315" url={URLToDisplay}></Iframe>
+        )
 
     // Handle the escape press event.
-   const  handleKeyUp = e => {  
-      const keys = {
-        27: () => {
-          e.preventDefault();
-          hideURLPreview();
-          window.removeEventListener('keyup', handleKeyUp, false);
-        },
-      };
+    const handleKeyUp = e => {
+        const keys = {
+            27: () => {
+                e.preventDefault()
+                hideURLPreview()
+                window.removeEventListener('keyup', handleKeyUp, false)
+            },
+        }
 
-      if (keys[e.keyCode]) { keys[e.keyCode](); }
+        if (keys[e.keyCode]) {
+            keys[e.keyCode]()
+        }
     }
 
     // Handle the mouse click outside modal.
@@ -41,8 +52,8 @@ const URLPreviewModal = ({ classes, hideURLPreview, URL }) => {
     const handleOutsideClick = e => {
         if (modal) {
             if (!modal.current.contains(e.target)) {
-              hideURLPreview()
-              document.removeEventListener('click', handleOutsideClick, false);
+                hideURLPreview()
+                document.removeEventListener('click', handleOutsideClick, false)
             }
         }
     }
@@ -51,11 +62,7 @@ const URLPreviewModal = ({ classes, hideURLPreview, URL }) => {
         <div className={classes.modalOverlay}>
             <div className={classes.modal} ref={modal}>
                 <div className={classes.modalContent}>
-                    <Iframe
-                        width="560"
-                        height="315"
-                        url={URLToDisplay}
-                    ></Iframe>
+                    {iframeToRender}
                 </div>
             </div>
 

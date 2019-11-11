@@ -14,7 +14,7 @@ const MainTable = ({showURLPreview}) => {
     const table = makeTable(35)
 
     return ( 
-        <div className="container">
+        <div >
             <table>
                 <thead>
                     <ResultCell/>    
@@ -28,6 +28,11 @@ const MainTable = ({showURLPreview}) => {
         </div>
      )
 }
+
+MainTable.propTypes = {
+    showURLPreview: PropTypes.func.isRequired,
+}
+
 const mapStateToProps = state => ({
     showURLPreview: state.URLPreview.showURLPreview,
 })

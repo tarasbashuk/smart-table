@@ -19,6 +19,6 @@ export const regexIsAverageFunction = /=AVERAGE\(([A-Z0-9,+])*\)/
 
 export const regexIsConcatFunction = /=CONCAT\(([A-Z0-9,+])*\)/
 
-export const regexIsHyperlinkFunction = /=HYPER\(([A-Za-zА-Яа-я0-9./])*\)/
+export const regexIsHyperlinkFunction = /=HYPER\(([A-Za-zА-Яа-я0-9./,+])*\)/
 
 export const regexFindCellsID = /(?<=\()[A-Z0-9,+]+(?=\))/g

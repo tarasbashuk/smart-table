@@ -82,4 +82,10 @@ export default {
         backgroundColor: '#444',
       },
     },
-  };
+
+    errorMessage: {
+      textAlign: "center",
+      fontSize: "26px",
+      color: "red"
+    }
+  }

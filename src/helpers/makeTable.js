@@ -21,7 +21,7 @@ const makeTable = rows => {
     const row = Array.from({ length: 26 }, (_, i) => i)
     const charsRow = letters.map(char => <th key={char}>{char}</th>)
 
-    table.push(<tr key={'row'}>{charsRow}</tr>)
+    table.push(<tr key={'row'} style={{height: "50px", verticalAlign: "bottom"}}>{charsRow}</tr>)
 
     for (let index = 1; index <= rows; index++) {
         const tableRow = row.map((_, i) => (

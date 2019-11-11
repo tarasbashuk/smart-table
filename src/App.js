@@ -3,10 +3,8 @@ import { Provider } from "react-redux"
 import Header from './components/Header.jsx'
 import MainTable from './components/MainTable.jsx'
 
-
 import store from "./store";
 
-import "./styles/style.css";
 
 class App extends Component {
     render() { 
@@ -15,7 +13,7 @@ class App extends Component {
                 <div>
                     <Header>
                     </Header>
-.                    <MainTable></MainTable>
+                    <MainTable></MainTable>
                 </div>
            </Provider>
         )

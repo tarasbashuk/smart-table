@@ -27,7 +27,8 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell, showURLPr
     useEffect(() => {
         const formatedInput = getFormatedInputValue(
             cellDataFromProps.value,
-            tableCells
+            tableCells,
+            id
         )
         if (
             cellDataFromProps.type === 'function' &&
@@ -84,7 +85,7 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell, showURLPr
 
     // On blur function get data from user, got function result if it needs, formatted input and set input value
     const onBlur = () => {
-        const formatedInput = getFormatedInputValue(inputValue, tableCells)
+        const formatedInput = getFormatedInputValue(inputValue, tableCells, id)
         setFormatedInput(formatedInput)
     }
 
@@ -92,7 +93,7 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell, showURLPr
 
     const onKeyEnter = e => {
         if (e.key === 'Enter') {
-            const formatedInput = getFormatedInputValue(inputValue, tableCells)
+            const formatedInput = getFormatedInputValue(inputValue, tableCells, id)
             setFormatedInput(formatedInput)
             onFocus()
         }
