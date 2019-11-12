@@ -11,6 +11,9 @@ import {
 
 import getInputFunctionResult from './getInputFunctionResult'
 
+// Defines data type in the cell and invoke specific functions for formatting/execution data returns 
+// initial input value, type of it, formatted result and type of result.
+
 const getFormatedInputValue = (inputValue, tableCells, currentCellID) => {
     if (inputValue === '') {
         return {

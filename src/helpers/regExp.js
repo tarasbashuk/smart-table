@@ -10,7 +10,6 @@ export const regexFormatDigitsWithSpaces =  /\B(?=(\d{3})+(?!\d))/g
 
 export const regexContainsURL = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s)]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s)]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s)]{2,}|www\.[a-zA-Z0-9]+\.[^\s)]{2,})/i
 
-// export const regexContainsFunction = /=([A-Z])*\(([A-Z0-9+,])*\)/
 export const regexContainsFunction = /=([A-Z])+\(([A-Za-z0-9+,.])*\)/
 
 export const regexIsSumFunction = /=SUM\(([A-Z0-9+])*\)/

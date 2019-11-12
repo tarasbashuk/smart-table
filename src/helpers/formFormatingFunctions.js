@@ -1,5 +1,8 @@
 import { regexFormatDigitsWithSpaces, regexContainsURL } from './regExp'
 
+
+// Functions for formatting data to display data/result in the cell
+
 export const formatFormToMoneyString = inputValue => {
     const input = inputValue.replace('$', '').replace(',', '.')
     const formatedInput = Number(input)

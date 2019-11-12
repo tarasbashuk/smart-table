@@ -9,6 +9,6 @@ export const showURLPreview = (URL) => dispatch => {
 
 export const hideURLPreview = () => dispatch => {
     dispatch({
-      type: HIDE_URL_PREVIEW,
+      type: HIDE_URL_PREVIEW
     })
   }

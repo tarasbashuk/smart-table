@@ -4,6 +4,9 @@ import { formatFormToMoneyString } from './formFormatingFunctions'
 
 import { formFunctionExecution, URLFunctionExecution } from './formFunctionExecution'
 
+// Depending on type of result getTypeOfFunction invoke URLFunctionExecution or formFunctionExecution
+// return object functionResult or error message, which will display at cell 
+
 const getInputFunctionResult = (inputValue, tableCells, currentCellID) => {
     let functionResult
     const typeOfFunction = getTypeOfFunction(inputValue)

@@ -145,6 +145,8 @@ export const formFunctionExecution = (
     }
 }
 
+//Gets URL from string, return it with result type
+
 export const URLFunctionExecution = inputValue => {
     const result = formatFormToURLString(inputValue)
 

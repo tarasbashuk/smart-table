@@ -11,6 +11,9 @@ import {
     regexIsHyperlinkFunction
 } from './regExp'
 
+
+// Functions for checking type of data in the cell and type of functions if function was defined in cell
+
 export const chekForString = inputValue =>
     regexContainsTwoDotsComas.test(inputValue) ||
     regexContainsAllExceptDotComaDigit.test(inputValue) ||

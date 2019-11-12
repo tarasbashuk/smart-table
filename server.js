@@ -11,7 +11,7 @@ app.use(express.static(__dirname))
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/test', function (req, res) {
- return res.send('Server running');
+ return res.send('Server running')
 })
 
 app.get('/*', function (req, res) {

@@ -62,7 +62,6 @@ const TableCell = ({ id, tableCells, setTableCell, setTableActiveCell, showURLPr
                 typeOfResult: formatedInput.typeOfResult,
             })
             if(formatedInput.typeOfResult === "URLString") {
-                console.log("formatedInput", formatedInput.functionResult)
                 showURLPreview(formatedInput.functionResult)
             }
         } else {

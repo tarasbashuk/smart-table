@@ -3,7 +3,7 @@ import { Provider } from "react-redux"
 import Header from './components/Header.jsx'
 import MainTable from './components/MainTable.jsx'
 
-import store from "./store";
+import store from "./store"
 
 
 class App extends Component {
